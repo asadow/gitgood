@@ -1,8 +1,9 @@
 .Rproj.user
 .Rhistory
-.RDatahahah
+.RData
+.Rhistory
+.RData
 .Ruserdata
 .Rdata
 .httr-oauth
 .DS_Store
-.wtf
