@@ -1,0 +1,39 @@
+---
+title: "Gittin' Good"
+format: html
+editor: visual
+---
+
+## Basics
+
+(After installing Git)
+
+`use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")` tells Git who you are.
+
+(After making a GitHub account)
+
+`usethis::create_github_token()` opens a webpage to make a password needed to access Github.
+
+`gitcreds::gitcreds_set()` lets you enter that secret password, allowing your computer to connect to GitHub.
+
+(After making an R project)
+
+`usethis::use_git()` in an R project activates the Git pane. 
+
+`usethis::use_github()` in an R project connects the project to GitHub.
+
+## Terminal
+
+Alt-Shift-M from RStudio gets you to the built-in Terminal.
+
+`git add your-file.extension` will stage (read: get ready to add) `your-file.extension`. You can add multiple files.
+
+`git commit` will commit the addition(s). An editor will pop up asking for a commit message (label). 
+
+`git commit --message 'your message'` avoids the unfriendly editor. 
+
+`WIP` is a good message for work-in-progress. Then once you add more files, you can keep committing to this WIP by `git commit --amend`. Once you are finished a body of work, you can do `git commit --amend --no-edit`.
+
+
+
+
