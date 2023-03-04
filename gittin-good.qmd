@@ -28,11 +28,14 @@ Alt-Shift-M from RStudio gets you to the built-in Terminal.
 
 `git add your-file.extension` will stage (read: get ready to add) `your-file.extension`. You can add multiple files.
 
+`git add -a` will add all files.
+
 `git commit` will commit the addition(s). An editor will pop up asking for a commit message (label). 
 
 `git commit --message 'your message'` avoids the unfriendly editor. 
 
 `WIP` is a good message for work-in-progress. Then once you add more files, you can keep committing to this WIP by `git commit --amend`. Once you are finished a body of work, you can do `git commit --amend --no-edit`.
+
 
 
 
