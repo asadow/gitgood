@@ -18,25 +18,75 @@ editor: visual
 
 (After making an R project)
 
-`usethis::use_git()` in an R project activates the Git pane. 
+`usethis::use_git()` in an R project activates the Git pane.
+
+`usethis::git_vaccinate()` adds unwanted files to a file called `.gitignore`. "This is good practice as it decreases the chance that you will accidentally leak credentials to GitHub."
 
 `usethis::use_github()` in an R project connects the project to GitHub.
 
 ## Terminal
 
-Alt-Shift-M from RStudio gets you to the built-in Terminal.
+`Alt-Shift-M` from RStudio gets you to the built-in Terminal.
 
-`git add your-file.extension` will stage (read: get ready to add) `your-file.extension`. You can add multiple files.
+`git add your-file-name.its-file-extension` will stage (read: get ready to add) `your-file-name.its-file-extension`. You can add multiple files.
 
 `git add .` will add all files in the current directory (which is just fine if you're in an RStudio project). `git add --all` and `git add -A` also do this but don't depend on directory.
 
-`git commit` will commit the addition(s). An editor will pop up asking for a commit message (label). 
+`git commit` will commit the addition(s). An editor will pop up asking for a commit message (label).
 
-`git commit --message 'your message'` avoids the unfriendly editor. `'WIP'` is a good message for work-in-progress.
+`git commit -m 'your message'` avoids the unfriendly editor. `'WIP'` is a good message for work-in-progress.
 
-`git commit --amend --no-edit` is great for committing to work-in-progress. Once you are finished a body of work, you can do `git commit --amend --m 'your update message'`.
+`git commit --amend --no-edit` is great for committing to work-in-progress. It tracks your work while avoiding a clutter of multiple commits and messages. Once you are finished a body of work, you can do `git commit --amend -m 'your body of work message'`.
 
+`git push` sends the commits to your main copy, which is on GitHub if you used `usethis::use_github()`.
 
+## Failed `git push`
 
+1.  Add and commit any changes on your computer that are not on GitHub.
+2.  `git pull` will grab the stuff from GitHub and merge it with the stuff on your computer.
 
+Then you will see `Merge made` or `Automatic merge failed`.
 
+`Automatic merge failed` means you need to open the files described and edit the pieces in between the \<\<\<\< and \>\>\>\> symbols, keeping what you want and removing the symbols. Then `git add` them, `git commit`, and `git push`.
+
+`git pull --rebase` is a better option than 2. (simply `git pull`) when conflicts between GitHub and your computer are unlikely. If you get `Automatic merge failed` then do `git rebase --abort` and try 2. instead.
+
+## Others' Work
+
+(After finding someone else's work you want to grab, edit, and suggest changes to)
+
+    usethis::create_from_github(
+      "https://github.com/OWNER/REPO",
+      destdir = "~/path/to/where/you/want/the/local/repo/"
+    )
+
+Make a new branch to do some work in. The reason you don't want to work in the `main` branch is because of the scenario when you want to propose changes. When you want to propose changes and thus request someone to pull from your copy, the name of the branch is important to isolate and characterize the nature of your proposal. There are [other reasons](https://stackoverflow.com/questions/33749832/why-is-it-bad-practice-to-commit-to-your-forks-master-branch) as well but the one described just now is the simplest.
+
+#### Making a branch
+
+[Read first](https://happygitwithr.com/git-remotes.html?q=remot#listing-what-remotes-exist)
+
+#### Updates
+
+If your upstream copy (the owner's copy on GitHub) has been updated, and you want to work on that updated copy, you will need to fetch it.
+
+1.  Be in your `main` branch.
+2.  `git fetch upstream`
+
+If you get `Your branch is ahead` or `Your branch and ... have diverged`, something went wrong. See [this advice](https://happygitwithr.com/upstream-changes.html).
+
+If not, proceed.
+
+`git pull upstream main --ff-only` to do the pull and make sure you confront the situation where you regrettably committed to `main` (recall it's better not to).
+
+You don't need to push to your copy on GitHub.
+
+There is also an option to sync your copy on GitHub with the owner's copy on GitHub.
+
+## Others' Requests
+
+https://happygitwithr.com/pr-extend.html
+
+## Undo
+
+`git reset --hard` if you pulled and want to go back.
